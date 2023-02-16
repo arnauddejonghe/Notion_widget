@@ -148,20 +148,20 @@ function CalendarControl() {
   const calendar = new Date();
   const calendarControl = {
     localDate: new Date(),
-    calWeekDays: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
+    calWeekDays: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"], // mettre Lun en premier
     calMonthName: [
       "Jan",
-      "Feb",
+      "Fév",
       "Mar",
-      "Apr",
-      "May",
+      "Avr",
+      "Mai",
       "Jun",
       "Jul",
-      "Aug",
+      "Aoû",
       "Sep",
       "Oct",
       "Nov",
-      "Dec"
+      "Déc"
     ],
     daysInMonth: function(month, year) {
       return new Date(year, month, 0).getDate();
