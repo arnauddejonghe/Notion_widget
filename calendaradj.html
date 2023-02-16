@@ -187,6 +187,12 @@ function CalendarControl() {
     getNextMonthFirstDate: function() {
       return new Date(calendar.getFullYear(), calendar.getMonth() + 1, 1).getDate();
     }
+    firstDayNumber: function() {
+     return (calendarControl.firstDay().getDay() === 0) ? 7 : calendarControl.firstDay().getDay();
+    },
+    lastDayNumber: function() {
+    return (calendarControl.lastDay().getDay() === 0) ? 7 : calendarControl.lastDay().getDay();
+}
   };
   return calendarControl;
 }
