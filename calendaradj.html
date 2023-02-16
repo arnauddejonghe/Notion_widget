@@ -179,111 +179,17 @@ function CalendarControl() {
       return calendarControl.lastDay().getDay() + 1;
     },
     getPreviousMonthLastDate: function() {
-      let lastDate = new Date(
-        calendar.getFullYear(),
-        calendar.getMonth(),
-        0
-      ).getDate();
-      return lastDate;
+      return new Date(calendar.getFullYear(), calendar.getMonth(), 0).getDate();
     },
-    navigateToPreviousMonth: function() {
-      calendar.setMonth(calendar.getMonth() - 1);
-      calendarControl.attachEventsOnNextPrev();
+    getPreviousMonthLastDay: function() {
+      return new Date(calendar.getFullYear(), calendar.getMonth(), 0).getDay() + 1;
     },
-    navigateToNextMonth: function() {
-      calendar.setMonth(calendar.getMonth() + 1);
-      calendarControl.attachEventsOnNextPrev();
-    },
-    navigateToCurrentMonth: function() {
-      let currentMonth = calendarControl.localDate.getMonth();
-      let currentYear = calendarControl.localDate.getFullYear();
-      calendar.setMonth(currentMonth);
-      calendar.setYear(currentYear);
-      calendarControl.attachEventsOnNextPrev();
-    },
-    displayYear: function() {
-      let yearLabel = document.querySelector(".calendar .calendar-year-label");
-      yearLabel.innerHTML = calendar.getFullYear();
-    },
-    displayMonth: function() {
-      let monthLabel = document.querySelector(
-        ".calendar .calendar-month-label"
-      );
-      monthLabel.innerHTML = calendarControl.calMonthName[calendar.getMonth()];
-    },
-    selectDate: function(e) {
-      console.log(
-        `${e.target.textContent} ${
-          calendarControl.calMonthName[calendar.getMonth()]
-        } ${calendar.getFullYear()}`
-      );
-    },
-    plotSelectors: function() {
-      document.querySelector(
-        ".calendar"
-      ).innerHTML += `<div class="calendar-inner"><div class="calendar-controls">
-      <div class="calendar-prev"><a href="#"><</a></div>
-      <div class="calendar-year-month">
-      <div class="calendar-month-label"></div>
-      <div>-</div>
-      <div class="calendar-year-label"></div>
-      </div>
-      <div class="calendar-next"><a href="#">></a></div>
-      </div>
-      <div class="calendar-today-date">Today: 
-        ${calendarControl.calWeekDays[calendarControl.localDate.getDay()]}, 
-        ${calendarControl.localDate.getDate()}, 
-        ${calendarControl.calMonthName[calendarControl.localDate.getMonth()]} 
-        ${calendarControl.localDate.getFullYear()}
-      </div>
-      <div class="calendar-body"></div></div>`;
-    },
-    plotDayNames: function() {
-      for (let i = 0; i < calendarControl.calWeekDays.length; i++) {
-        document.querySelector(".calendar .calendar-body").innerHTML += `<div>${
-          calendarControl.calWeekDays[i]
-        }</div>`;
-      }
-    },
-    plotDates: function() {
-      document.querySelector(".calendar .calendar-body").innerHTML = "";
-      calendarControl.plotDayNames();
-      calendarControl.displayMonth();
-      calendarControl.displayYear();
-      let count = 1;
-      let prevDateCount = 0;
-      //let prevMonthLastDate = calendarControl.getPreviousMonthLastDate();
-      let calendarDays = calendarControl.daysInMonth(
-        calendar.getMonth() + 1,
-        calendar.getFullYear()
-      );
-
-      // dates of current month
-      for (let i = 1; i < calendarDays; i++) {
-        if (i < calendarControl.firstDayNumber()) {
-          prevDateCount += 1;
-          document.querySelector(
-            ".calendar .calendar-body"
-          ).innerHTML += `<div class="empty-dates"></div>`;
-        } else {
-          let currentMonth = calendarControl.localDate.getMonth() + 1;
-          let changedMonth = calendar.getMonth() + 1;
-          let currentYear = calendarControl.localDate.getFullYear();
-          let changedYear = calendar.getFullYear();
-          if (
-            currentYear === changedYear &&
-            currentMonth === changedMonth &&
-            count === calendar.getDate()
-          ) {
-            document.querySelector(
-              ".calendar .calendar-body"
-            ).innerHTML += `<div class="calendar-today"><a class="dateNumber" href="#">${count++}</a></div>`;
-          } else
-            document.querySelector(
-              ".calendar .calendar-body"
-            ).innerHTML += `<div><a class="dateNumber" href="#">${count++}</a></div>`;
-        }
-      }
+    getNextMonthFirstDate: function() {
+      return new Date(calendar.getFullYear(), calendar.getMonth() + 1, 1).getDate();
+    }
+  };
+  return calendarControl;
+}
 
       //remaining dates after month dates
       for (let j = 0; j < prevDateCount + 1; j++) {
